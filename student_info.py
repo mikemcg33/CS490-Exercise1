@@ -1,5 +1,6 @@
 #Add Info with POST Request
 import requests
+import json
 
 url = "https://student-info-api.netlify.app/.netlify/functions/submit_student_info"
 
@@ -18,6 +19,12 @@ body = {
 headers = {
     "Content-Type": "application/json"
 }
+
+try:
+    json.dumps(body)
+except(TypeError, ValueError):
+    print("Incorrect Data Format")
+    exit(100)
 
 response = requests.post(url, json=body, headers=headers)
 
